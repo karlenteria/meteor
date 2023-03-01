@@ -24,4 +24,3 @@ static-html@1.3.2 # Define static page content in .html files
 react-meteor-data # React higher-order component for reactively tracking Meteor data
 check
 standard-minifier-css
-juliancwirko:postcss
