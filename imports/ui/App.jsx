@@ -5,8 +5,8 @@ import ContactsForm from "./ContactsForm";
 //Contact: name, email, imageurl
 export const App = () => (
   <div>
-    <h1>Meteor Wallet</h1>
+    <h1>Meteor Wallet - Galaxy</h1>
     <ContactsForm />
-    <ContactList/>
+    <ContactList />
   </div>
 );
