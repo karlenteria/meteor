@@ -6,9 +6,12 @@ import { SuccessAlert } from "./components/SuccessAlert";
 const ContactList = () => {
   const [success, setSuccess] = useState("");
 
-  const isLoading = useSubscribe("allContacts");
+  const isLoading = useSubscribe("contacts");
   const contacts = useFind(() => {
-    return ContactsCollection.find({}, { sort: { createdAt: -1 } });
+    return ContactsCollection.find(
+      { archived: { $ne: true } },
+      { sort: { createdAt: -1 } }
+    );
   });
 
   const showSuccess = () => {
@@ -17,10 +20,10 @@ const ContactList = () => {
       setSuccess("");
     }, 3000);
   };
-  const removeContact = (event, _id) => {
+  const archiveContact = (event, _id) => {
     event.preventDefault();
 
-    Meteor.call("contact.remove", { contactId: _id });
+    Meteor.call("contact.archive", { contactId: _id });
     console.log("success remove");
     showSuccess();
   };
@@ -58,7 +61,7 @@ const ContactList = () => {
           <div>
             <a
               href=""
-              onClick={(event) => removeContact(event, contact._id)}
+              onClick={(event) => archiveContact(event, contact._id)}
               className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-md"
             >
               Remove
